@@ -1,5 +1,20 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
+<div class="container vh-100">
+  {{#each this.questions as |question index|}}
+    <div class="row d-flex align-items-center justify-content-center h-100" id="q{{index}}">
+      <div class="question-box show-on-scroll col-10">
+        <p class="text-left">{{add index 1}} <i class="fa fa-arrow-right"></i> {{question.headline}}</p>
+        {{#if question.description}}
+          <p class="text-left text-muted"><small>{{question.description}}</small></p>
+        {{/if}}
+        {{#each question.choices as |choice index2|}}
+          <button class="btn-option w-100 mb-1" {{on "click" (fn this.checkOption "A" (concat "q" (add 1 index)))}}>
+            <span>{{add index2 1}}</span> {{choice.label}}
+          </button>  
+        {{/each}}
+      </div>
+    </div>
+  {{/each}}
+</div>
+
 
 {{outlet}}
