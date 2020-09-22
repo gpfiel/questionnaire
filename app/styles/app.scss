@@ -57,10 +57,10 @@ $default_color: #24498E;
   .image-question {
     position: absolute;
     z-index: 9998;
-    left: -90px;
-    top: -180px;
-    height: 15rem;
-    width: 15rem;
+    right: -50px;
+    top: -120px;
+    height: 10rem;
+    width: 10rem;
   }
 
   &.is-visible {
