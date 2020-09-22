@@ -8,6 +8,7 @@ export default class QuestionMultipleChoiceComponent extends Component {
   alphabet = ("abcdefghijklmnopqrstuvwxyz").toUpperCase().split('');
 
   @action checkOption(choice, question, confirm) {
+    if (question.multiple != "true") question.choices.setEach('selected', false)
     if (choice) choice.selected = !choice.selected
     if ((!question.required && question.multiple == "true" && confirm) ||
           (question.required && question.multiple == "true" && confirm && question.isAnyChoiceSelected) 
