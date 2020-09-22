@@ -1,5 +1,6 @@
 <div class="row d-flex align-items-center justify-content-center h-100" id={{@question.identifier}}>
   <div class="question-box show-on-scroll col-10">
+    <img src="{{rootURL}}images/{{@question.image}}.png" class="rounded image-question rounded-circle animated bounce">
     <p class="text-left">{{add @position 1}} <i class="fa fa-arrow-right"></i> {{@question.headline}}</p>
     {{#if @question.description}}
       <p class="text-left text-muted"><small>{{@question.description}}</small></p>

@@ -26,7 +26,7 @@ export default class ApplicationController extends Controller {
   @map('questions', function(question, index) {
     let choices = question.choices
     delete question.choices 
-    let questionTmp = this.store.createRecord('question', {id: question.identifier, ...question} )
+    let questionTmp = this.store.createRecord('question', {id: question.identifier, image: Math.floor(Math.random() * 10) + 1, ...question} )
     choices && choices.forEach(choice => {
       this.store.createRecord('choice', {
         question: questionTmp, 

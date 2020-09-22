@@ -12,6 +12,7 @@ export default class QuestionModel extends Model {
   @attr('string') next;
   @attr('string') before;
   @attr('string') value;
+  @attr('number') image;
   @hasMany('choice') choices;
   @attr() jumps;
 
