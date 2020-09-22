@@ -5,15 +5,6 @@ export default {
     "name": "Privathaftpflichtversicherung",
     "questions": [
       {
-        "question_type": "text",
-        "identifier": "textarea_121109799",
-        "headline": "Hast Du noch weitere Informationen oder Anmerkungen für uns?",
-        "description": null,
-        "required": true,
-        "multiline": "true",
-        "jumps": []
-      },
-      {
         "question_type": "multiple-choice",
         "identifier": "list_12110962",
         "headline": "Wen möchtest Du versichern?",
