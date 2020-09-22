@@ -2,11 +2,26 @@ import Controller from '@ember/controller';
 import Quiz from '../constants/quiz';
 import { map } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import { action, computed } from '@ember/object';
 
 export default class ApplicationController extends Controller {
   @service('store') store
+  @service('global') global
 
+  questionnaire = Quiz.questionnaire;
   questions = Quiz.questionnaire.questions;
+
+  constructor() {
+    super(...arguments)
+    this.global.questionSelected = this.questionsWithNextIndentifier.firstObject.identifier
+  }
+
+  @computed('global.questionSelected', 'questionsWithNextIndentifier')
+  get getQuestionSelected () {
+    return this.questionsWithNextIndentifier.find((question) => {
+      return question.identifier == this.global.questionSelected
+    })
+  }
 
   @map('questions', function(question, index) {
     let choices = question.choices
@@ -22,7 +37,18 @@ export default class ApplicationController extends Controller {
     });
     
     questionTmp.next = this.questions[index + 1] ? this.questions[index + 1].identifier : null
+    questionTmp.before = this.questions[index - 1] ? this.questions[index - 1].identifier : null
     return questionTmp
   })
   questionsWithNextIndentifier;
+
+  @action navigateTo(direction) {
+    if (direction == "up" && this.getQuestionSelected.before) {
+      this.global.questionSelected = this.getQuestionSelected.before
+    } else if (direction == "down" && this.getQuestionSelected.next) {
+      this.global.questionSelected = this.getQuestionSelected.next
+    }
+    document.getElementById(this.getQuestionSelected.identifier).scrollIntoView();
+  }
+
 }

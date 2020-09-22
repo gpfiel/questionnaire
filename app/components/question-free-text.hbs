@@ -1,0 +1,29 @@
+<div class="row d-flex align-items-center justify-content-center h-100" id={{@question.identifier}}>
+  <div class="question-box show-on-scroll col-10">
+    <p class="text-left">{{add @position 1}} <i class="fa fa-arrow-right"></i> {{@question.headline}}</p>
+    {{#if @question.description}}
+      <p class="text-left text-muted"><small>{{@question.description}}</small></p>
+    {{/if}}
+
+    <div class="input-block active">
+      <div class="input-control">
+        {{#if (eq @question.multiline "true")}}
+          <Textarea @value={{@question.value}} class="w-100"/>
+        {{else}}
+          <Input autocomplete="off" type="text" @value={{@question.value}} />
+        {{/if}}
+      </div>
+    </div>
+
+    {{#if (and @question.required @question.isEmptyText)}}
+      <p class="text-danger text-center"><small>This field is required.</small></p>
+    {{/if}}
+
+    <div class="d-flex justify-content-center mt-3">
+      <button type="button" name="button" class="btn btn-primary w-100 btn-sm" 
+        disabled={{and @question.required @question.isEmptyText}}
+        {{on "click" (fn this.validateText @question)}}
+      >Next</button>
+    </div>
+  </div>
+</div>

@@ -1,14 +1,19 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class QuestionMultipleChoiceComponent extends Component {
+  @service('global') global
+  
   alphabet = ("abcdefghijklmnopqrstuvwxyz").toUpperCase().split('');
 
   @action checkOption(choice, question, confirm) {
     if (choice) choice.selected = !choice.selected
     if ((!question.required && question.multiple == "true" && confirm) ||
           (question.required && question.multiple == "true" && confirm && question.isAnyChoiceSelected) 
-          || (question.multiple == "false"))
-      question.next && document.getElementById(question.next).scrollIntoView();
+          || (question.multiple == "false")) {
+            this.global.questionSelected = question.next
+            question.next && document.getElementById(question.next).scrollIntoView();
+          }
   }
 }
