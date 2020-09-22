@@ -1,0 +1,24 @@
+<div class="row d-flex align-items-center justify-content-center h-100" id={{@question.identifier}}>
+  <div class="question-box show-on-scroll col-10">
+    <p class="text-left">{{add @position 1}} <i class="fa fa-arrow-right"></i> {{@question.headline}}</p>
+    {{#if @question.description}}
+      <p class="text-left text-muted"><small>{{@question.description}}</small></p>
+    {{/if}}
+    {{#each @question.choices as |choice index|}}
+      <button class="btn-option w-100 mb-1 {{if choice.selected "selected"}}" {{on "click" (fn this.checkOption choice @question false)}}>
+        <span>{{get alphabet index}}</span> {{choice.label}}
+      </button>  
+    {{/each}}
+
+    {{#if (and @question.required (not @question.isAnyChoiceSelected))}}
+      <p class="text-danger text-center"><small>This field is required.</small></p>
+    {{/if}}
+
+    {{#if (not-eq @question.multiple "false")}}
+      <div class="d-flex justify-content-center mt-3">
+        <button type="button" name="button" class="btn btn-primary w-100 btn-sm" disabled={{and @question.required (not @question.isAnyChoiceSelected)}}
+          {{on "click" (fn this.checkOption null @question true)}}>Next</button>
+      </div>
+    {{/if}}
+  </div>
+</div>

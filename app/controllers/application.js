@@ -1,13 +1,28 @@
 import Controller from '@ember/controller';
-import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
 import Quiz from '../constants/quiz';
+import { map } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
 
 export default class ApplicationController extends Controller {
-  // @tracked displayNext = false;
+  @service('store') store
+
   questions = Quiz.questionnaire.questions;
 
-  @action checkOption(option, navigateTo) {
-    document.getElementById(navigateTo).scrollIntoView();
-  }
+  @map('questions', function(question, index) {
+    let choices = question.choices
+    delete question.choices 
+    let questionTmp = this.store.createRecord('question', {id: question.identifier, ...question} )
+    choices && choices.forEach(choice => {
+      this.store.createRecord('choice', {
+        question: questionTmp, 
+        label: choice.label, 
+        value: choice.value, 
+        selected: choice.selected
+      })
+    });
+    
+    questionTmp.next = this.questions[index + 1] ? this.questions[index + 1].identifier : null
+    return questionTmp
+  })
+  questionsWithNextIndentifier;
 }

@@ -9,8 +9,8 @@ export default {
         "identifier": "list_12110962",
         "headline": "Wen möchtest Du versichern?",
         "description": null,
-        "required": false,
-        "multiple": "false",
+        "required": true,
+        "multiple": "true",
         "choices": [
           {
             "label": "Meine Familie mit Kindern",
