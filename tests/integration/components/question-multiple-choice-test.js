@@ -34,7 +34,5 @@ module('Integration | Component | question-multiple-choice', function(hooks) {
     assert.equal(this.element.querySelector('span.title').textContent.trim(), 'Wen möchtest Du versichern?');
     assert.equal(this.element.querySelector('button.btn-primary').textContent.trim(), 'Next');
     assert.equal(this.element.querySelectorAll('.btn-option').length, 5, '5 results rendered');
-    // row d-flex align-items-center justify-content-center h-100 c-snap
-
   });
 });
