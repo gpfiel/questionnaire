@@ -10,6 +10,15 @@
 $default_secondary_color: #E6E2EA;
 $default_color: #24498E;
 
+.container-fluid.c-snap {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+
+.row.c-snap {
+  scroll-snap-align: center;
+}
+
 .hearder-title {
   background-color: $default_color;
   color: #FFF;
