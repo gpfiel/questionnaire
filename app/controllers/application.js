@@ -43,12 +43,15 @@ export default class ApplicationController extends Controller {
   questionsWithNextIndentifier;
 
   @action navigateTo(direction) {
-    if (direction == "up" && this.getQuestionSelected.before)
+    if (!this.getQuestionSelected)
+      this.global.questionSelected = this.questionsWithNextIndentifier.firstObject.identifier
+      
+    if (direction == "up" && this.getQuestionSelected && this.getQuestionSelected.before)
       this.global.questionSelected = this.getQuestionSelected.before
-    else if (direction == "down" && this.getQuestionSelected.next)
+    else if (direction == "down" && this.getQuestionSelected && this.getQuestionSelected.next)
       this.global.questionSelected = this.getQuestionSelected.next
     
-    document.getElementById(this.getQuestionSelected.identifier).scrollIntoView();
+    this.getQuestionSelected && document.getElementById(this.getQuestionSelected.identifier).scrollIntoView();
   }
 
 }
